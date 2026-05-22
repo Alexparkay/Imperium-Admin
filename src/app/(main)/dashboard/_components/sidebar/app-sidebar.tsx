@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
-import { CircleHelp, ClipboardList, Command, Database, File, Search, Settings } from "lucide-react";
+import { CircleHelp, ClipboardList, Database, File, Search, Settings } from "lucide-react";
 import { useShallow } from "zustand/react/shallow";
 
 import {
@@ -76,9 +77,24 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild className="h-12 group-data-[collapsible=icon]:!p-0">
               <Link prefetch={false} href="/dashboard/default">
-                <Command />
+                <Image
+                  src="/transparent-imperium-logo.png"
+                  alt="Imperium Admin"
+                  width={256}
+                  height={256}
+                  priority
+                  className="size-8 shrink-0 object-contain dark:hidden"
+                />
+                <Image
+                  src="/imperium-logo-inverted.png"
+                  alt="Imperium Admin"
+                  width={256}
+                  height={256}
+                  priority
+                  className="hidden size-8 shrink-0 object-contain dark:block"
+                />
                 <span className="font-semibold text-base">{APP_CONFIG.name}</span>
               </Link>
             </SidebarMenuButton>

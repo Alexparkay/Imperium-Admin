@@ -88,6 +88,13 @@ const defaultPrimary = {
   dark: defaultDarkPrimaryMatch?.[1]?.trim() ?? "",
 };
 
+// Pin "Imperium" to the end of the preset list (alphabetical default would place it 2nd).
+const imperiumIdx = presets.findIndex((p) => p.value === "imperium");
+if (imperiumIdx >= 0) {
+  const [imperium] = presets.splice(imperiumIdx, 1);
+  presets.push(imperium);
+}
+
 presets.unshift({ label: "Default", value: "default", primary: defaultPrimary });
 
 const generatedBlock = `// --- generated:themePresets:start ---
