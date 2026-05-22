@@ -29,8 +29,11 @@ The entry point for customizing this dashboard. Orchestrates discovery → scaff
 5. Confirm user is ready to scaffold
 6. Invoke imperium-scaffold skill
 7. Scaffold reports completion
-8. Suggest `npm run dev` to see the result
-9. Offer next steps (add more pages, connect data, etc.)
+8. Suggest `npm run dev` to see the result locally
+9. Offer next steps:
+   - "Add more pages" → /imperium-add-page
+   - "Deploy live to your own GitHub + Vercel" → /imperium-deploy
+   - "Connect to real data" → v2 (Supabase wiring not yet automated)
 ```
 
 ## Returning user flow

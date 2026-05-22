@@ -85,8 +85,20 @@ Pre-commit hooks run Biome automatically — bad commits get blocked before they
 | First-time setup | `/imperium-setup` | Discovery conversation → spec → scaffold |
 | Add a page later | `/imperium-add-page` | Single-page scaffold using existing spec |
 | Iterate | (just talk to Claude) | Tweak copy, swap charts, refactor sections |
+| **Go live** | `/imperium-deploy` | **Disconnect upstream, push to YOUR GitHub, deploy to Vercel** |
 
 See [docs/customization.md](docs/customization.md) for the full workflow.
+
+## Going live
+
+After customizing locally, your repo still points to the upstream template. Run `/imperium-deploy` to:
+
+1. Sever the upstream connection (wipes `.git` and reinits, OR repoints origin — your choice)
+2. Create or connect your own GitHub repo
+3. Push your first commit
+4. Connect to Vercel and deploy live
+
+Claude handles both the `gh` CLI path and the web-UI fallback if you don't have CLI tools installed.
 
 ---
 

@@ -14,23 +14,39 @@
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "Bash(git branch:*)",
+      "Bash(git remote:*)",
       "Bash(git checkout -b imperium/*)",
+      "Bash(git config --local user.name:*)",
+      "Bash(git config --local user.email:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push -u origin main)",
+      "Bash(git push origin main)",
+      "Bash(gh --version)",
+      "Bash(gh auth status)",
+      "Bash(gh repo create:*)",
+      "Bash(gh repo view:*)",
+      "Bash(vercel --version)",
+      "Bash(vercel link:*)",
+      "Bash(vercel deploy:*)",
+      "Bash(vercel env ls)",
       "Read(./**)",
       "Edit(src/**)",
       "Edit(.imperium/**)",
       "Edit(docs/**)",
       "Edit(public/**)",
+      "Edit(.claude/**)",
       "Write(src/**)",
       "Write(.imperium/**)",
       "Write(docs/**)",
       "Write(public/**)"
     ],
     "deny": [
-      "Bash(rm -rf:*)",
-      "Bash(git push --force:*)",
-      "Bash(git reset --hard:*)",
+      "Bash(git push --force origin main)",
+      "Bash(git push --force-with-lease origin main)",
+      "Bash(git reset --hard origin/main)",
       "Bash(npm publish:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install -g:*)"
     ]
   }
 }

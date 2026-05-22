@@ -68,6 +68,40 @@ Once you approve the spec, Claude:
 
 ---
 
+## Going live — your own GitHub + Vercel
+
+Once you're happy with your local dashboard, deploy it. **Don't just `git push` — your repo still points to the upstream template.**
+
+Run:
+
+```
+/imperium-deploy
+```
+
+Or say: "deploy", "ship it", "push to github", "go live".
+
+Claude walks you through:
+
+1. **Pre-flight checks** — runs `npm run check` and `npm run build` first. If either fails, you fix before proceeding.
+2. **History strategy** — pick one:
+   - **Clean slate (recommended)** — wipes `.git`, reinitializes fresh, one initial commit. True white-label, no connection to Alexparkay/Imperium-Admin in your repo's history.
+   - **Preserve history** — keeps all commits, just repoints origin to your repo. Useful if you want to pull future Imperium-Admin template updates as a secondary remote.
+3. **GitHub setup** — if you have `gh` CLI installed, Claude creates your repo with one command. Otherwise it walks you through the github.com/new web flow.
+4. **Vercel deployment** — if you have `vercel` CLI installed, runs `vercel link` + `vercel deploy --prod`. Otherwise walks you through vercel.com/new web import.
+5. **Confirmation** — you get the live `.vercel.app` URL. Future `git push` to your repo auto-deploys.
+
+### What you'll need
+
+- A GitHub account (free plan is fine)
+- A Vercel account (free plan covers personal projects)
+- Optional but recommended: GitHub CLI (`winget install --id GitHub.cli` on Windows, `brew install gh` on Mac) and Vercel CLI (`npm i -g vercel`)
+
+### The hard rule
+
+**Until you run `/imperium-deploy`, your local repo still has `origin` pointing at `Alexparkay/Imperium-Admin`. Any `git push` you try will fail (no write access).** Run the deploy command before customizing too much locally if you want changes auto-committed to your own repo from the start.
+
+---
+
 ## Iterating after the first build
 
 ### Add a new page later
@@ -154,7 +188,7 @@ These are on the roadmap but not yet automated:
 
 - `/imperium-connect-supabase` — wire your dashboard to a Supabase backend for real data
 - `/imperium-prune` — destructive cleanup of the `(examples)/` folder for users who want a truly clean slate
-- `/imperium-sync-upstream` — pull updates from the Imperium-Admin template after you've forked
+- `/imperium-sync-upstream` — automated upstream sync (manual flow documented in `/imperium-deploy` output for users who pick history-preserve mode)
 - `/imperium-status` — diagnostic dump of what's been scaffolded vs example vs custom
 - MCP server integrations (Linear, Notion, Supabase) preconfigured
 
@@ -197,10 +231,12 @@ Both are fine. The skills are guardrails, not gates.
 |---|---|
 | `/imperium-setup` | First-run customization or returning-user options |
 | `/imperium-add-page` | Add a single new page |
+| `/imperium-deploy` | Disconnect from upstream, push to your GitHub, deploy to Vercel |
 | `npm run dev` | Start dev server |
 | `npm run check` | Run Biome lint+format check |
 | `npm run check:fix` | Autofix Biome issues |
 | `npm run generate:presets` | Regenerate theme dropdown after adding a CSS preset |
+| `npm run build` | Production build (run before deploying) |
 
 ---
 

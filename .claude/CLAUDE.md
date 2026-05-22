@@ -51,7 +51,7 @@ See [`.claude/catalog/style-guide.md`](catalog/style-guide.md) for the full rule
 
 ## Trigger phrase routing
 
-If the user says any of these (or close variants), invoke the `imperium-setup` skill immediately:
+**Customization (start or iterate)** — invoke `imperium-setup` skill:
 - "set me up"
 - "let's customize"
 - "I just cloned this"
@@ -60,7 +60,19 @@ If the user says any of these (or close variants), invoke the `imperium-setup` s
 - "customize this dashboard"
 - "imperium setup"
 
-If the user says "add a page" / "create a new page" / "I want a page for X", invoke the `imperium-scaffold` skill in single-page mode.
+**Add a single page** — invoke `imperium-scaffold` skill in single-page mode:
+- "add a page" / "create a new page"
+- "I want a page for X"
+- "add a [type] page"
+
+**Deploy live** — invoke `imperium-deploy` skill:
+- "deploy"
+- "ship it"
+- "publish"
+- "go live"
+- "push to github"
+- "deploy to vercel"
+- "make it live"
 
 If the user is in mid-conversation and asks design/architecture questions about THIS template (not about their custom dashboard), answer directly using the catalog files as reference.
 
@@ -71,6 +83,8 @@ When invoked, the typical chain is:
 2. If no spec → invokes `imperium-discovery` (conversation → writes `.imperium/spec.md`)
 3. Once spec is approved → invokes `imperium-scaffold` (reads spec, copies patterns from `(examples)/`)
 4. `imperium-quality` is always consulted by scaffold before writing any code (biome guardrails)
+5. After scaffold completes, user can run `/imperium-deploy` to push to their own GitHub + deploy to Vercel
+6. `imperium-deploy` handles disconnecting from this upstream template, creating user's GitHub repo, and deploying live
 
 ## Quick reminders
 
