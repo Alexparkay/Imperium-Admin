@@ -47,8 +47,8 @@ export const THEME_PRESET_OPTIONS = [
     label: "Imperium",
     value: "imperium",
     primary: {
-      light: "oklch(0.50 0.13 157)",
-      dark: "oklch(0.50 0.13 157)",
+      light: "oklch(0.5 0.13 157)",
+      dark: "oklch(0.5 0.13 157)",
     },
   },
 ] as const;

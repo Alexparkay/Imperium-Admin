@@ -11,6 +11,7 @@
     "check": "biome check",
     "check:fix": "biome check --write",
     "prepare": "husky",
+    "postinstall": "node -e \"console.log('\\n\\u001b[32m  Imperium Admin is ready.\\u001b[0m\\n  Open Claude Code in this folder and say:  set me up\\n  Or run the slash command:  /imperium-setup\\n')\"",
     "generate:presets": "ts-node -P tsconfig.scripts.json src/scripts/generate-theme-presets.ts"
   },
   "lint-staged": {

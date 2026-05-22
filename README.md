@@ -1,78 +1,92 @@
 # Imperium Admin
 
-A modern Next.js admin dashboard built with TypeScript, Tailwind CSS v4, and shadcn/ui. Multiple dashboards, authentication layouts, customizable theme presets, and flexible layout controls.
+A clone-and-customize Next.js admin dashboard template. Tell Claude Code what dashboard you want, and it scaffolds the pages for you — preserving the premium UI quality of the underlying shadcn/ui component library.
+
+## Quick Start
+
+```bash
+git clone https://github.com/Alexparkay/Imperium-Admin.git my-dashboard
+cd my-dashboard
+npm install
+```
+
+Then open [Claude Code](https://claude.com/claude-code) in this folder and type:
+
+```
+/imperium-setup
+```
+
+Or just say: **"set me up"**.
+
+Claude will run a quick discovery conversation, write a spec to `.imperium/spec.md`, and scaffold your custom pages by copying from the example library.
+
+Full guide: [docs/customization.md](docs/customization.md)
 
 ## Features
 
-- Next.js 16, TypeScript, Tailwind CSS v4, and shadcn/ui
-- Responsive and mobile-friendly
-- Customizable theme presets (light/dark with color schemes like Tangerine, Brutalist, and more)
-- Flexible layouts (collapsible sidebar, variable content widths)
-- Authentication flows and screens
-- Prebuilt dashboards (Default, CRM, Finance, Analytics, Productivity, E-commerce, Academy) plus legacy variants
-- Role-Based Access Control (RBAC) with config-driven UI and multi-tenant support *(planned)*
-
-> The default dashboard uses the **shadcn neutral** theme. Additional presets included: Tangerine, Neo Brutalism, Soft Pop. You can create more by following the same structure.
+- Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui
+- 10 production-ready example dashboards in a reference library (default, CRM, finance, analytics, productivity, e-commerce, academy, logistics, users, mail)
+- 5 theme presets including the dark-green Imperium palette
+- Authentication flows (4 screens), responsive layouts, sidebar controls
+- Strict Biome + TypeScript pipeline — generated code stays clean
+- Husky pre-commit auto-formats and validates every change
+- Claude-Code-native automation: skills, slash commands, project catalog
 
 ## Tech Stack
 
 - **Framework**: Next.js 16 (App Router), TypeScript, Tailwind CSS v4
-- **UI**: shadcn/ui
+- **UI**: shadcn/ui + Radix primitives
 - **Validation**: Zod
 - **Forms & State**: React Hook Form, Zustand
 - **Tables**: TanStack Table
+- **Charts**: Recharts (wrapped via shadcn chart primitive)
 - **Tooling**: Biome, Husky
-
-## Screens
-
-### Available
-- Default Dashboard
-- CRM Dashboard
-- Finance Dashboard
-- Analytics Dashboard
-- Productivity Dashboard
-- E-commerce Dashboard
-- Academy Dashboard
-- Email Page
-- Authentication (4 screens)
-- Legacy: Default v1, CRM v1, Finance v1, Analytics v1
-
-### Coming Soon
-- Logistics Dashboard
-- Chat Page
-- Calendar Page
-- Kanban Board
-- Invoice Page
-- Users Management
-- Roles Management
 
 ## Architecture
 
-Colocation-based file system. Each feature keeps its own pages, components, and logic inside its route folder. Shared UI, hooks, and configuration live at the top level.
+Colocation-based file system. Each feature keeps its own pages, components, and logic inside its route folder.
 
-## Getting Started
+- `src/app/(main)/dashboard/(examples)/` — reference library of example dashboards (hidden from nav, accessible via direct URL)
+- `src/app/(main)/dashboard/{your-pages}/` — your scaffolded pages (populated by `/imperium-setup`)
+- `src/components/ui/` — shadcn primitives
+- `src/components/custom/` — user-authored components (yours to own)
+- `src/styles/presets/` — theme presets (one CSS file per preset)
+- `.claude/` — Claude Code skills, commands, and catalog
+- `.imperium/` — your dashboard spec (source of truth, committed to git)
 
-### Run locally
-
-1. Install dependencies
-   ```bash
-   npm install
-   ```
-
-2. Start the dev server
-   ```bash
-   npm run dev
-   ```
-
-App will be running at [http://localhost:3000](http://localhost:3000).
-
-### Formatting and Linting
+## Run locally
 
 ```bash
-npx @biomejs/biome check --write
+npm install
+npm run dev
 ```
 
-See the [Biome documentation](https://biomejs.dev/) for rules, fixes, and CLI options.
+Dev server runs at [http://localhost:3000](http://localhost:3000).
+
+To see the example dashboards in the sidebar during development, add to `.env.local`:
+
+```
+NEXT_PUBLIC_SHOW_EXAMPLES=true
+```
+
+## Formatting and linting
+
+```bash
+npm run check       # validate (read-only)
+npm run check:fix   # autofix what can be autofixed
+```
+
+Pre-commit hooks run Biome automatically — bad commits get blocked before they ship.
+
+## Customization workflow
+
+| Step | Command | What it does |
+|---|---|---|
+| First-time setup | `/imperium-setup` | Discovery conversation → spec → scaffold |
+| Add a page later | `/imperium-add-page` | Single-page scaffold using existing spec |
+| Iterate | (just talk to Claude) | Tweak copy, swap charts, refactor sections |
+
+See [docs/customization.md](docs/customization.md) for the full workflow.
 
 ---
 
