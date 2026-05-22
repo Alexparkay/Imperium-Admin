@@ -1,21 +1,15 @@
 import {
   Banknote,
-  Calendar,
   ChartBar,
   Fingerprint,
   Forklift,
   Gauge,
   GraduationCap,
-  Kanban,
   LayoutDashboard,
   ListTodo,
-  Lock,
   type LucideIcon,
   Mail,
-  MessageSquare,
-  ReceiptText,
   ShoppingBag,
-  SquareArrowUpRight,
   Users,
 } from "lucide-react";
 
@@ -102,22 +96,12 @@ const exampleGroups: NavGroup[] = [
   },
 ];
 
-// The default nav is intentionally minimal. /imperium-setup populates it with the user's
-// scaffolded pages. Set NEXT_PUBLIC_SHOW_EXAMPLES=true to merge the example groups back in
-// during development.
-const baseNav: NavGroup[] = [
-  {
-    id: 1,
-    label: "Coming Soon",
-    items: [
-      { title: "Chat", url: "/dashboard/coming-soon", icon: MessageSquare, comingSoon: true },
-      { title: "Calendar", url: "/dashboard/coming-soon", icon: Calendar, comingSoon: true },
-      { title: "Kanban", url: "/dashboard/coming-soon", icon: Kanban, comingSoon: true },
-      { title: "Invoice", url: "/dashboard/coming-soon", icon: ReceiptText, comingSoon: true },
-      { title: "Roles", url: "/dashboard/coming-soon", icon: Lock, comingSoon: true },
-      { title: "Others", url: "/dashboard/coming-soon", icon: SquareArrowUpRight, comingSoon: true },
-    ],
-  },
-];
+// The default nav is intentionally empty. /imperium-setup populates it with the user's
+// scaffolded pages. This keeps the dashboard from showing template fluff (auth subitems,
+// coming-soon placeholders, example dashboards) before customization.
+//
+// Set NEXT_PUBLIC_SHOW_EXAMPLES=true in .env.local to surface the example groups while
+// developing or comparing patterns.
+const baseNav: NavGroup[] = [];
 
 export const sidebarItems: NavGroup[] = showExamples ? [...baseNav, ...exampleGroups] : baseNav;

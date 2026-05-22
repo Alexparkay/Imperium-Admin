@@ -125,6 +125,25 @@ Reusable patterns from `(examples)/` plus shadcn primitives. Format: **path + si
 
 ---
 
+## Progress / Goal visualization
+
+### Dot-bar pattern (PREMIUM — use this for goal progress)
+**Reference**: `(examples)/crm/_components/task-reminders.tsx` — see `proposalGoalBars`
+**Use when**: showing progress toward a discrete goal ("12 of 18 deals", "$45k of $60k", "67% to monthly target")
+**Pattern**: array of 30-50 vertical bars (`w-1.5 h-10 rounded-full`), active filled with `bg-muted-foreground/75`, inactive with `bg-muted-foreground/25`
+**DO NOT** use shadcn `<Progress>` primitive for this — it looks generic. The dot-bar is the premium choice.
+
+### Progress (loading / processing only)
+**Path**: `@/components/ui/progress`
+**Use when**: indeterminate or determinate loading states, file uploads, multi-step wizards
+**Don't use**: for goal progress (see dot-bar above)
+
+### Mini sparkline
+**Reference**: `(examples)/(legacy)/default-v1/_components/section-cards.tsx`
+**Use when**: trend shape inside a KPI card (no axes, no tooltips, ~40px tall)
+
+---
+
 ## Status badges / pills
 
 ### Badge (basic)

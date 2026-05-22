@@ -18,25 +18,36 @@ The goal is **80% of their custom dashboard in one shot**, with premium UI quali
 
 - **Example dashboards (10 of them)**: `src/app/(main)/dashboard/(examples)/` — hidden from nav by default, accessible via direct URL. These are the **scaffold base**.
 - **User spec (source of truth)**: `.imperium/spec.md` — committed to git, defines what the user's dashboard should look like
-- **Catalog (Claude's reference library)**: `.claude/catalog/` — pages, components, charts, style-guide
+- **Catalog (Claude's reference library)**: `.claude/catalog/`
+  - `pages.md` — example library map (user concept → which example to copy)
+  - **`component-selector.md`** — intent → component decision tree. **Read this BEFORE choosing any component during scaffolding.**
+  - `components.md` — reusable patterns by category
+  - `charts.md` — chart pattern → use-case mapping
+  - `style-guide.md` — visual + code rules + premium-feel checklist
 - **Skills (Claude's behavior)**: `.claude/skills/imperium-*/` — setup, discovery, scaffold, quality
 - **Slash commands**: `.claude/commands/imperium-*.md`
 - **Branding**: `src/config/app-config.ts` (app name + meta), `public/imperium-logo-*.png` (logos), `src/styles/presets/imperium.css` (Imperium theme preset)
-- **Sidebar nav**: `src/navigation/sidebar/sidebar-items.ts` — Imperium-setup populates this with the user's scaffolded pages
+- **Sidebar nav**: `src/navigation/sidebar/sidebar-items.ts` — starts empty by default; Imperium-setup populates with the user's scaffolded pages
 
 ## Critical rules
 
-1. **ALWAYS read `.imperium/spec.md` if it exists before scaffolding anything.** It's the source of truth for what the user wants.
-2. **ALWAYS check `.claude/catalog/pages.md` before generating new pages.** Map the user's need to an existing example, then copy + adapt.
-3. **NEVER generate components from scratch when an example exists in `(examples)/`.** Copy from there. The examples are biome-clean and on-brand.
-4. **NEVER hardcode hex colors** — use theme CSS variables (`bg-primary`, `text-muted-foreground`, etc.)
-5. **NEVER import from packages not in `package.json`.** Check before importing. No hallucinated dependencies.
-6. **Biome WILL run on every commit.** Code MUST pass `npm run check` before you declare a task done.
-7. **Use `next/image`, not `<img>`.** Use `lucide-react` icons, no inline SVGs. Use shadcn primitives from `@/components/ui/*`.
-8. Files must be **kebab-case** (`section-cards.tsx`). Component exports are **PascalCase**.
-9. **Colocation**: page-specific components go in `_components/` next to the page. Mock data colocated with consumers.
+1. **ALWAYS read `.imperium/spec.md` if it exists before scaffolding anything.** It's the source of truth.
+2. **ALWAYS consult `.claude/catalog/component-selector.md` before choosing any component during scaffolding.** This is the file that prevents AI-slop substitutions (using `<Progress>` instead of the dot-bar pattern, plain badges instead of pipeline pills, etc.).
+3. **ALWAYS check `.claude/catalog/pages.md` before generating new pages.** Map the user's need to an existing example, then copy + adapt.
+4. **NEVER generate components from scratch when an example exists in `(examples)/`.** Copy from there. Examples are biome-clean, on-brand, and battle-tested.
+5. **NEVER substitute a generic primitive for a polished pattern that already exists.** See `component-selector.md` for the anti-pattern table. Examples:
+   - Goal progress → dot-bar pattern from `task-reminders.tsx`, NOT `<Progress>`
+   - Pipeline stages → filled colored pills, NOT plain `<Badge>`
+   - KPI tiles → MetricCards or KpiStrip pattern, NOT raw `<Card>` with `<CardTitle>`
+6. **NEVER hardcode hex colors** — use theme CSS variables (`bg-primary`, `text-muted-foreground`, etc.)
+7. **NEVER import from packages not in `package.json`.** Check before importing.
+8. **Biome WILL run on every commit.** Code MUST pass `npm run check` before you declare a task done.
+9. **Use `next/image`, not `<img>`.** Use `lucide-react` icons, no inline SVGs. Use shadcn primitives from `@/components/ui/*`.
+10. **Files: kebab-case (`section-cards.tsx`). Component exports: PascalCase.**
+11. **Colocation**: page-specific components in `_components/` next to the page. Mock data colocated with consumers.
+12. **Polish pass is mandatory** after scaffolding — run the premium-feel checklist in `style-guide.md` before declaring done.
 
-See [`.claude/catalog/style-guide.md`](catalog/style-guide.md) for the full rule set.
+See [`.claude/catalog/style-guide.md`](catalog/style-guide.md) for the full rule set and [`component-selector.md`](catalog/component-selector.md) for the intent → component decision tree.
 
 ## Trigger phrase routing
 
